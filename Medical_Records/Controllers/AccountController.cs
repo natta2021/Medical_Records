@@ -1,4 +1,5 @@
 ﻿using Medical_Records.Models;
+using Medical_Records.MedicalRecordsRoles;
 using Medical_Records.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+namespace Medical_Records.MedicalRecordsRoles { 
 namespace Medical_Records.Controllers
 {
     public class AccountController : Controller
@@ -27,16 +28,25 @@ namespace Medical_Records.Controllers
         public IActionResult Login()
         {
             return View();
-        } 
-        
-        public IActionResult Register()
+        }
+       
+
+        public async Task<IActionResult> Register()
         {
+
+            if (!_roleManager.RoleExistsAsync(MedicalRecordsRoles.Admin).GetAwaiter().GetResult())
+            {
+               await _roleManager.CreateAsync(new IdentityRole(MedicalRecordsRoles.Admin));
+               await _roleManager.CreateAsync(new IdentityRole(MedicalRecordsRoles.Patient));
+               //await _roleManager.CreateAsync(new IdentityRole(MedicalRecordsRoles.Doctor));
+
+            }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -54,6 +64,7 @@ namespace Medical_Records.Controllers
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, model.RoleName);
                     // if registration is succeeded the user account is created b4 redict.
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     // Change Redirect to user profile later! 
@@ -63,4 +74,5 @@ namespace Medical_Records.Controllers
             return View();
         }
     }
+}
 }

@@ -74,7 +74,7 @@
             <select asp-for="RoleName"
                     asp-items="@Medical_Records.MedicalRecordsRoles.MedicalRecordsRoles.GetRolesForDropDown()"
                     class="form-control"></select>
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <span asp-validation-for="RoleName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">

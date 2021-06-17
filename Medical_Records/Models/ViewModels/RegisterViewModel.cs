@@ -23,7 +23,7 @@ namespace Medical_Records.Models.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage ="The password and confirmation passwoard do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation passwoard do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
