@@ -16,6 +16,6 @@ namespace Medical_Records.Models.ViewModels
         public string Password { get; set; }
 
         [Display(Name = "Remember Me?")]
-        public string RememberMe { get; set; }
+        public bool RememberMe { get; set; }
     }
 }
