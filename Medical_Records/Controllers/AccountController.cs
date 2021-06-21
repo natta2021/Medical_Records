@@ -39,6 +39,7 @@ namespace Medical_Records.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe,false);
                     if (result.Succeeded)
                     {
+                        // Change redirect to user profile later!
                         return RedirectToAction("Index", "Home");
                     }
                     ModelState.AddModelError("", "Invalid login attempt");
