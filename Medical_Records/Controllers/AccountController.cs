@@ -100,6 +100,14 @@ namespace Medical_Records.Controllers
                 await _signInManager.SignOutAsync();
                 return RedirectToAction("Login", "Account");
             }
+
+            // display user profile
+            [HttpGet]
+            public IActionResult UserProfile()
+            {
+                return View();
+            }
+        }
     }
-}
+    
 }
