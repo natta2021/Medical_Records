@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Medical_Records.Models.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,7 @@ namespace Medical_Records.Models
            : base(options)
         {
         }
+
+        public IEnumerable<RegisterViewModel> RegisterViewModel { get; internal set; }
     }
 }

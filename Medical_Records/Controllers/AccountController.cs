@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace Medical_Records.MedicalRecordsRoles { 
 namespace Medical_Records.Controllers
 {
@@ -102,10 +104,13 @@ namespace Medical_Records.Controllers
             }
 
             // display user profile
-            [HttpGet]
+            
             public IActionResult UserProfile()
             {
-                return View();
+                
+                var users = _db.Users.ToList();
+                return View(users);
+
             }
         }
     }
