@@ -42,7 +42,7 @@ namespace Medical_Records.Controllers
                     if (result.Succeeded)
                     {
                         // Change redirect to user profile later!
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Appointment");
                     }
                     ModelState.AddModelError("", "Invalid login attempt");
                 }
