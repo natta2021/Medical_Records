@@ -1,0 +1,12 @@
+﻿<div class="row">
+    <div class="container">
+        @if (User.IsInRole(Medical_Records.MedicalRecordsRoles.MedicalRecordsRoles.Admin))
+        {
+            <div class="form-group row col-2" id="divPatientList">
+                <label> Select Patient</label>
+                @Html.DropDownList("patientId", new SelectList(ViewBag.PatientList, "Id", "UserName"), new { @class="form-control select2"})
+            </div>
+        }
+    </div>
+
+</div>

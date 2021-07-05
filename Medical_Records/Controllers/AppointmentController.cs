@@ -17,7 +17,7 @@ namespace Medical_Records.Controllers
         }
         public IActionResult Index()
         {
-            _appointmentService.GetPatientList();
+            ViewBag.PatientList = _appointmentService.GetPatientList();
             return View();
         }
     }
