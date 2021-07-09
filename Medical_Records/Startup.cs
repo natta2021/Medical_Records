@@ -33,10 +33,13 @@ namespace Medical_Records
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
 
-            services.AddTransient<IAppointmentService, AppointmentService>();            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
+            services.AddTransient<IAppointmentService, AppointmentService>();           
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddHttpContextAccessor();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
