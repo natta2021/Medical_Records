@@ -15,6 +15,7 @@ namespace Medical_Records.Models
         {
         }
 
+        public DbSet<Appointment> Appointments { get; set; }
         public IEnumerable<RegisterViewModel> RegisterViewModel { get; internal set; }
     }
 }
