@@ -11,8 +11,8 @@ namespace Medical_Records.Models.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; } // convert dateTime to string
+        public string EndDate { get; set; }
         public int Duration { get; set; }
         public string PatientId { get; set; }
 

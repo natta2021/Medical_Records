@@ -20,6 +20,37 @@ namespace Medical_Records.MedicalRecordsRoles
             {
                 _db = db;
             }
+
+            public async Task<int> AddUpdate(AppointmentVM model)
+            {
+                var startDate = DateTime.Parse(model.StartDate);
+                var endDate = DateTime.Parse(model.StartDate).AddMinutes(Convert.ToDouble(model.Duration));
+
+                if (model!=null && model.Id > 0)
+                {
+                    // Update
+                    return 1;
+                }
+                else
+                {
+                    // Create
+
+                    Appointment appointment = new Appointment()
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Location = model.Location,
+                        StartDate = startDate,
+                        EndDate = endDate
+                        //AdminId = model.AdminId
+                    };
+
+                    _db.Appointments.Add(appointment);
+                    await _db.SaveChangesAsync();
+                    return 2;
+                }
+            } // AddUpdate
+
             public List<PatientVM> GetPatientList()
             {
                
