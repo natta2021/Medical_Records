@@ -29,32 +29,31 @@ namespace Medical_Records.MedicalRecordsRoles
             role = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
         }
 
-        [HttpPost]
-        [Route("SaveCalendarDate")]
-        public IActionResult SaveCalendarDate(AppointmentVM data)
-        {
-            CommonResponse<int> commonResponse = new CommonResponse<int>();
-
-            try
+            [HttpPost]
+            [Route("SaveCalendarData")]
+            public IActionResult SaveCalendarData(AppointmentVM data)
             {
-                commonResponse.status = _appointmentService.AddUpdate(data).Result;
-                if (commonResponse.status == 1)
+                CommonResponse<int> commonResponse = new CommonResponse<int>();
+                try
                 {
+                    commonResponse.status = _appointmentService.AddUpdate(data).Result;
+                    if (commonResponse.status == 1)
+                    {
                         commonResponse.message = MedicalRecordsRoles.appointmentUpdated;
-                }
+                    }
                     if (commonResponse.status == 2)
-                {
+                    {
                         commonResponse.message = MedicalRecordsRoles.appointmentAdded;
                 }
             }
-            catch (Exception e)
-            {
-
-                commonResponse.message = e.Message;
+                catch (Exception e)
+                {
+                    commonResponse.message = e.Message;
                     commonResponse.status = MedicalRecordsRoles.failure_code;
+                }
+
+                return Ok(commonResponse);
             }
-            return Ok(commonResponse);
-        }
     }
 }
 }
