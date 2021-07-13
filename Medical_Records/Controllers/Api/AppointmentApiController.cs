@@ -1,5 +1,4 @@
 ﻿using Medical_Records.Models.ViewModels;
-using Medical_Records.Models.MedicalRecordsRoles;
 using Medical_Records.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

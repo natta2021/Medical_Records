@@ -39,3 +39,16 @@ function onShowModal(obj, isEventDetail) {
 function onCloseModal() {
     $("#appointmentInput").modal("hide");
 }
+
+function onSubmitForm() {
+    var requestData = {
+        Id: parseInt($("#id").val().val()),
+        Title: $("#tilte").val(),
+        Description: $("#descriptions").val(),
+        Location: $("#location").val(),
+        StartDate: $("#appointmentDate").val(),
+        PatientId: $("#patientId").val(),
+        Duration: $("#duration").val(),
+
+    };
+}
