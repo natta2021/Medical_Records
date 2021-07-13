@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Medical_Records.Models
 {
+    // IdentityDbContext<ApplicationUser> point to Customize column
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

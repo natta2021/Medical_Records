@@ -14,6 +14,7 @@ namespace Medical_Records.Controllers
 {
     public class AccountController : Controller
     {
+            //Access database
         private readonly ApplicationDbContext _db;
         UserManager<ApplicationUser> _userManager;
         SignInManager<ApplicationUser> _signInManager;
@@ -44,6 +45,7 @@ namespace Medical_Records.Controllers
                         // Change redirect to user profile later!
                         return RedirectToAction("Index", "Appointment");
                     }
+                    // if is not success then display err msg.
                     ModelState.AddModelError("", "Invalid login attempt");
                 }
             return View(model);
@@ -52,7 +54,7 @@ namespace Medical_Records.Controllers
 
         public async Task<IActionResult> Register()
         {
-
+                // check if roles is exist if not then create roles Admin, Patient into db.
                 if (!_roleManager.RoleExistsAsync(MedicalRecordsRoles.Admin).GetAwaiter().GetResult())
                 {
                     await _roleManager.CreateAsync(new IdentityRole(MedicalRecordsRoles.Admin));
@@ -65,11 +67,14 @@ namespace Medical_Records.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        // model retrieve everything from Register.cshtml
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                    // if is valid from client site <partial name="_ValidationScriptsPartial" then create user
+                    var user = new ApplicationUser
                 {
                     UserName = model.UserName,
                     Email = model.Email,
@@ -83,12 +88,14 @@ namespace Medical_Records.Controllers
                 var result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)
                 {
+                        // if user select role then ásign role name into db. ps RoleName is from rester.cshtml form
                     await _userManager.AddToRoleAsync(user, model.RoleName);
                     // if registration is succeeded the user account is created b4 redict.
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     // Change Redirect to user profile later! 
                     return RedirectToAction("Index", "Home");
                 }
+                // in register needs to display specific err msg. ex. username is already taken.
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
@@ -99,6 +106,7 @@ namespace Medical_Records.Controllers
             [HttpPost]
             public async Task<IActionResult>Logout()
             {
+                // after logout then redict page to login page.
                 await _signInManager.SignOutAsync();
                 return RedirectToAction("Login", "Account");
             }

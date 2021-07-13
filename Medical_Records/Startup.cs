@@ -33,7 +33,8 @@ namespace Medical_Records
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
 
-            services.AddTransient<IAppointmentService, AppointmentService>();           
+            services.AddTransient<IAppointmentService, AppointmentService>();
+            // AddIdentity pass in 2 params & save into db by .AddEntityFrameworkStores
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 

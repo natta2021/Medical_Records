@@ -1,10 +1,12 @@
-﻿
+﻿@* Check is signsin I need inject this & need to register inside startup > ConfigService *@
 @inject Microsoft.AspNetCore.Identity.SignInManager<Medical_Records.Models.ApplicationUser> SignInManager
 @*@inject UserManager<IdentityUser> UserManager*@
 
 <ul class="navbar-nav">
+
     @if (SignInManager.IsSignedIn(User))
     {
+        @* check if user is signin display userName instead of email and logout btn *@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
         </li>
@@ -17,6 +19,7 @@
     }
     else
     {
+        @* if user is != login then show signup & register btn *@
         <li class="nav-item">
             <a class="nav-link text-dark" id="registerLink" asp-controller="Account" asp-action="Register">Register</a>
         </li>
